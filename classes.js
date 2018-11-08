@@ -1,12 +1,17 @@
 class Defender{
     constructor(box, color){
-        this.color = color;
         this.box = box;
+        this.color = color;  
         this.lifes = 5;
+        this.position;
     }
 
     newStart(){
         this.lifes = 5;
+    }
+
+    getLifes(){
+        return this.lifes;
     }
 
     lifeUp(){
@@ -15,6 +20,14 @@ class Defender{
 
     lifeDown(){
         this.lifes--;
+    }
+
+    getColor(){
+        return this.color;
+    }
+
+    changeColor(newColor){
+        this.color = newColor;
     }
 }
 
