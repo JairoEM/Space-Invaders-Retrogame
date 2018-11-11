@@ -1,5 +1,5 @@
 class Defender{
-    constructor(box, color){
+    constructor(box, color, bullet){
         this.box = box;
         this.color = color;  
         this.lifes = 5;
@@ -31,9 +31,9 @@ class Defender{
     }
 }
 
-class Shoot{
+class Bullet{
     constructor(){
-        this.size = 2;
+        this.size = 1;
     }
 
     increaseSize(){
