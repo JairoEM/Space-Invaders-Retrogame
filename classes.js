@@ -1,9 +1,8 @@
-class Defender{
-    constructor(box, color, bullet){
-        this.box = box;
-        this.color = color;  
+export class Defender{
+    constructor(spaceship, bullet){
+        this.spaceship = spaceship;
+        this.bullet = bullet;  
         this.lifes = 5;
-        this.position;
     }
 
     newStart(){
@@ -21,17 +20,10 @@ class Defender{
     lifeDown(){
         this.lifes--;
     }
-
-    getColor(){
-        return this.color;
-    }
-
-    changeColor(newColor){
-        this.color = newColor;
-    }
 }
 
-class Bullet{
+
+export class Bullet{
     constructor(){
         this.size = 1;
     }
@@ -43,16 +35,25 @@ class Bullet{
     decreaseSize(){
         this.size--;
     }
+
+    getBullet(){
+        return this.size;
+    }
 }
 
-class Invader{
-    constructor(size, color, lifes){
-        this.size = size;
+
+export class Invader{
+    constructor(color, lifes, points){
         this.color = color;
         this.lifes = lifes;
+        this.points = points;
     }
 
     loseLife(){
         this.lifes--;
+    }
+
+    getPoints(){
+        return this.points;
     }
 }
