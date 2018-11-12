@@ -24,7 +24,7 @@ export class Defender{
 
 
 export class Bullet{
-    constructor(){
+    constructor(x, y, r, nodo){
         this.damage = 1;
     }
 
