@@ -43,14 +43,18 @@ export class Bullet{
 
 
 export class Invader{
-    constructor(color, lifes, points){
+    constructor(color, health, points){
         this.color = color;
-        this.lifes = lifes;
+        this.health = health;
         this.points = points;
     }
 
     loseLife(){
-        this.lifes--;
+        this.health--;
+    }
+
+    getHealth(){
+        return this.health;
     }
 
     getPoints(){

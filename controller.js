@@ -76,7 +76,7 @@ setInterval( () => {
 function createInitialInvaders(){
     for(let i = 12; i <= 250; i = i+35){
         var rect = document.createElementNS(svgNS,'rect');
-        rect.setAttribute('x', i-1);
+        rect.setAttribute('x', i-2);
         rect.setAttribute('y', 0);
         rect.setAttribute('width', 16);
         rect.setAttribute('height', 16);
