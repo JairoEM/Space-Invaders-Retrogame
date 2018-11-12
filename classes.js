@@ -1,8 +1,20 @@
 export class Defender{
-    constructor(spaceship, bullet){
-        this.spaceship = spaceship;
-        this.bullet = bullet;  
+    constructor(){ 
         this.lifes = 5;
+        this.svg = document.getElementById("table");
+        this.svgNS= svg.namespaceURI;
+        this.object = document.createElementNS(svgNS,'rect');
+        this.x = 120;
+        this.y = 390;
+        this.width = 10;
+        this.height = 10;
+
+        this.object.setAttribute('x', this.x);
+        this.object.setAttribute('y', this.y);
+        this.object.setAttribute('width', this.width);
+        this.object.setAttribute('height', this.height);
+        this.object.setAttribute('class', 'player');
+        this.object.setAttribute('fill','blue');
     }
 
     newStart(){
@@ -24,10 +36,20 @@ export class Defender{
 
 
 export class Bullet{
-    constructor(x, y, r, nodo){
+    constructor(cx, svgNS){
         this.damage = 1;
-    }
+        this.object = document.createElementNS(svgNS,'circle');
+        this.cx = cx;
+        this.cy = 386;
+        this.r = 2;
 
+        this.object.setAttribute('cx', this.cx);
+        this.object.setAttribute('cy', this.cy);
+        this.object.setAttribute('r', this.r);
+        this.object.setAttribute('class', 'circle');
+        this.object.setAttribute('fill','black');
+    }
+        
     increaseDamage(){
         this.damage++;
     }
@@ -38,10 +60,6 @@ export class Bullet{
         }else{
             return null;
         }
-    }
-
-    getBullet(){
-        return this.damage;
     }
 }
 

@@ -1,52 +1,48 @@
-import {Defender, Bullet, Board, Invader} from "./classes.js";
+import {Defender, Bullet, Invader} from "./classes.js";
 
 //Create objects
-var spaceship = document.getElementById("spaceship");
-var bullet = new Bullet();
-var defender = new Defender(spaceship, bullet);
-
 var svg = document.getElementById("table");
 var svgNS = svg.namespaceURI;
+var defender = new Defender();
+svg.appendChild(defender);
 
-//Create valuable attributes
+
+// Create valuable variables
 var x;
-
-
-//Create function to move the defender's spaceship
 var key;
-var imgForsen = document.getElementById("mySpaceship");
+console.log(defender.x);
+console.log(defender.y);
+
+// Create function to move the defender's spaceship
+// var imgForsen = document.getElementById("mySpaceship");
 document.addEventListener("keydown", function playerMove(event){
-    //Capture the key event and check defenders x position
     key = event.keyCode;
-    x = parseInt(spaceship.getAttribute("x"));
+    x = parseInt(defender.x);
     
     //Make the spaceship move
     if((key == 39) && (x <= 240)){
-        spaceship.setAttribute("x" , x + 2);
-        imgForsen.setAttribute("x" , x + 2);
+        defender.x = x + 2;
+        
+        // spaceship.setAttribute("x" , x + 2);
+        // imgForsen.setAttribute("x" , x + 2);
     }
     if((key == 37) && (x >= 0)){
-        spaceship.setAttribute("x" , x - 2);
-        imgForsen.setAttribute("x" , x - 2);
+        defender.x = x - 2;
+        // spaceship.setAttribute("x" , x - 2);
+        // imgForsen.setAttribute("x" , x - 2);
     }
 });
 
 
-//Create function to shoot
+// Create function to shoot
 var laser;
 document.addEventListener("keypress", function playerShoots(event){
-    //Capture the key event and check defenders x position
     key = event.keyCode;
     x = parseInt(spaceship.getAttribute("x"));
 
     if(key == 38){
-        var circ = document.createElementNS(svgNS,'circle');
-        circ.setAttribute('cx', x + 5);
-        circ.setAttribute('cy', 386);
-        circ.setAttribute('r', 2);
-        circ.setAttribute("class", "circle")
-        circ.setAttribute('fill','black');
-        svg.appendChild(circ);
+        var shoot = new Bullet(x + 5);
+        svg.appendChild(shoot);
 
         laser = document.createElement("AUDIO");
         laser.setAttribute("src", "Sounds/laser.mp3");
