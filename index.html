@@ -10,7 +10,12 @@
 <body>
     <div id="box">
         <svg id="table">
-            <rect id="spaceship" x="120" y="390" width="10" height="10" fill="blue"/>
+            <defs> 
+                <pattern id="mySpaceship" x="120" y="390" patternUnits="userSpaceOnUse" height="10" width="10">
+                    <image x="0" y="0" height="10" width="10" xlink:href="Images/token.png"></image>
+                </pattern>
+            </defs>        
+            <rect id="spaceship" x="120" y="390" height="10" width="10" fill="url(#mySpaceship)"/>
         </svg>
     </div>
     <script src="./controller.js" type="module"></script>

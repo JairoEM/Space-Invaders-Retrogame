@@ -14,6 +14,7 @@ var x;
 
 //Create function to move the defender's spaceship
 var key;
+var imgForsen = document.getElementById("mySpaceship");
 // var moveRight = false;
 // var moveLeft = false;
 document.addEventListener("keydown", function playerMove(event){
@@ -24,9 +25,11 @@ document.addEventListener("keydown", function playerMove(event){
     //Make the spaceship move
     if((key == 39) && (x <= 240)){
         spaceship.setAttribute("x" , x + 2);
+        imgForsen.setAttribute("x" , x + 2);
     }
     if((key == 37) && (x >= 0)){
         spaceship.setAttribute("x" , x - 2);
+        imgForsen.setAttribute("x" , x - 2);
     }
 
     // while((key == 39) && (x <= 240)){
@@ -39,6 +42,7 @@ document.addEventListener("keydown", function playerMove(event){
 
 
 //Create function to shoot
+var laser;
 document.addEventListener("keypress", function playerShoots(event){
     //Capture the key event and check defenders x position
     key = event.keyCode;
@@ -52,6 +56,11 @@ document.addEventListener("keypress", function playerShoots(event){
         circ.setAttribute("class", "circle")
         circ.setAttribute('fill','black');
         svg.appendChild(circ);
+
+        laser = document.createElement("AUDIO");
+        laser.setAttribute("src", "Sounds/laser.mp3");
+        laser.setAttribute("class", "laser");
+        laser.play();
     }
 });
 
@@ -59,14 +68,18 @@ document.addEventListener("keypress", function playerShoots(event){
 //Interval to make shoots move
 var circles;
 var circlesPosition;
+var lasers;
 setInterval( () => {
     circles = document.getElementsByClassName("circle");
+    lasers = document.getElementsByClassName("laser");
+    
     for(let i = 0; i < circles.length; i++){ 
         circlesPosition = parseInt(circles[i].getAttribute("cy"));
         circles[i].setAttribute("cy", circlesPosition - 2);
 
         if(circlesPosition == 0){
             svg.removeChild(circles[i]);
+            body.removeChild(lasers[i]);
         }
     }
 }, 10);

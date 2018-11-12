@@ -25,19 +25,23 @@ export class Defender{
 
 export class Bullet{
     constructor(){
-        this.size = 1;
+        this.damage = 1;
     }
 
-    increaseSize(){
-        this.size++;
+    increaseDamage(){
+        this.damage++;
     }
 
-    decreaseSize(){
-        this.size--;
+    decreaseDamage(){
+        if(this.damage <= 2){
+            this.damage--;
+        }else{
+            return null;
+        }
     }
 
     getBullet(){
-        return this.size;
+        return this.damage;
     }
 }
 
