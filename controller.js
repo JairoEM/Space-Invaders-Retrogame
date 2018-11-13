@@ -2,47 +2,38 @@ import {Defender, Bullet, Invader} from "./classes.js";
 
 //Create objects
 var svg = document.getElementById("table");
-var svgNS = svg.namespaceURI;
 var defender = new Defender();
-svg.appendChild(defender);
+svg.appendChild(defender.object);
 
 
 // Create valuable variables
 var x;
 var key;
-console.log(defender.x);
-console.log(defender.y);
+
 
 // Create function to move the defender's spaceship
-// var imgForsen = document.getElementById("mySpaceship");
-document.addEventListener("keydown", function playerMove(event){
+var imgForsen = document.getElementById("mySpaceship");
+defender.object.setAttribute('fill', 'url(#mySpaceship)');
+var laser;
+
+document.addEventListener("keydown", function playerActions(event){
     key = event.keyCode;
-    x = parseInt(defender.x);
+    x = parseInt(defender.object.getAttribute("x"));
     
-    //Make the spaceship move
+    // Make spaceship moves
     if((key == 39) && (x <= 240)){
-        defender.x = x + 2;
-        
-        // spaceship.setAttribute("x" , x + 2);
-        // imgForsen.setAttribute("x" , x + 2);
+        defender.object.setAttribute("x", x + 2);
+        imgForsen.setAttribute("x" , x + 2);
     }
     if((key == 37) && (x >= 0)){
-        defender.x = x - 2;
-        // spaceship.setAttribute("x" , x - 2);
-        // imgForsen.setAttribute("x" , x - 2);
+        defender.object.setAttribute("x", x - 2);
+        imgForsen.setAttribute("x" , x - 2);
     }
-});
 
-
-// Create function to shoot
-var laser;
-document.addEventListener("keypress", function playerShoots(event){
-    key = event.keyCode;
-    x = parseInt(spaceship.getAttribute("x"));
-
+    // Make spaceship shoots
     if(key == 38){
         var shoot = new Bullet(x + 5);
-        svg.appendChild(shoot);
+        svg.appendChild(shoot.object);
 
         laser = document.createElement("AUDIO");
         laser.setAttribute("src", "Sounds/laser.mp3");
@@ -52,17 +43,16 @@ document.addEventListener("keypress", function playerShoots(event){
 
 
 //Interval to make shoots move
-var circles;
-var circlesPosition;
+var bullets;
+var bulletsPosition;
 setInterval( () => {
-    circles = document.getElementsByClassName("circle");
+    bullets = document.getElementsByClassName("circle");
+    for(let i = 0; i < bullets.length; i++){ 
+        bulletsPosition = parseInt(bullets[i].getAttribute("cy"));
+        bullets[i].setAttribute("cy", bulletsPosition - 2);
 
-    for(let i = 0; i < circles.length; i++){ 
-        circlesPosition = parseInt(circles[i].getAttribute("cy"));
-        circles[i].setAttribute("cy", circlesPosition - 2);
-
-        if(circlesPosition == 0){
-            svg.removeChild(circles[i]);
+        if(bulletsPosition <= 0){
+            svg.removeChild(bullets[i]);
         }
     }
 }, 10);
@@ -71,30 +61,18 @@ setInterval( () => {
 //Interval to create the invaders
 function createInitialInvaders(){
     for(let i = 12; i <= 250; i = i+35){
-        var rect = document.createElementNS(svgNS,'rect');
-        rect.setAttribute('x', i-2);
-        rect.setAttribute('y', 0);
-        rect.setAttribute('width', 16);
-        rect.setAttribute('height', 16);
-        rect.setAttribute("class", "rectangle")
-        rect.setAttribute('fill','purple');
-        svg.appendChild(rect);
+        var invader = new Invader(i-2, 3, 20);
+        svg.appendChild(invader.object);
     }
 }
 createInitialInvaders();
 
 setInterval( () => {
     for(let i = 12; i <= 250; i = i+35){
-        var rect = document.createElementNS(svgNS,'rect');
-        rect.setAttribute('x', i);
-        rect.setAttribute('y', -24);
-        rect.setAttribute('width', 16);
-        rect.setAttribute('height', 16);
-        rect.setAttribute("class", "rectangle")
-        rect.setAttribute('fill','purple');
-        svg.appendChild(rect);
+        var invader = new Invader(i, 3, 20);
+        svg.appendChild(invader.object);
     }   
-} , 12000);
+} , 12001);
 
 
 //Interval to move the invaders X and Y axes
