@@ -55,6 +55,9 @@ setInterval( () => {
             svg.removeChild(bullets[i]);
         }
     }
+
+
+
 }, 10);
 
 
@@ -67,19 +70,14 @@ function createInitialInvaders(){
 }
 createInitialInvaders();
 
-setInterval( () => {
-    for(let i = 12; i <= 250; i = i+35){
-        var invader = new Invader(i, 3, 20);
-        svg.appendChild(invader.object);
-    }   
-} , 12001);
 
-
-//Interval to move the invaders X and Y axes
-var countSeconds = 8;
-var invadersMoveX = 1;
+// Invaders move in X and Y axes and create a new row
 var rectangles;
 var rectanglesPositionX;
+var rectanglesPositionY;
+var invadersMoveX = 1;
+var countX = 8;
+var countY = 2;
 setInterval( () => {
     rectangles = document.getElementsByClassName("rectangle");
     for(let i = 0; i < rectangles.length; i++){
@@ -91,18 +89,24 @@ setInterval( () => {
             rectangles[i].setAttribute("x", rectanglesPositionX - 2);
         }     
     }
-    if(countSeconds == 12){
+    if(countX == 12){
         invadersMoveX++;
-        countSeconds = 0;
+        countX = 0;
     }
-    countSeconds++;
-} , 500);
+    countX++;
 
-var rectanglesPositionY;
-setInterval( () => {
-    rectangles = document.getElementsByClassName("rectangle");
-    for(let i = 0; i < rectangles.length; i++){ 
-        rectanglesPositionY = parseInt(rectangles[i].getAttribute("y"));
-        rectangles[i].setAttribute("y", rectanglesPositionY + 24);
+    if(countY == 24){
+        rectangles = document.getElementsByClassName("rectangle");
+        for(let i = 0; i < rectangles.length; i++){ 
+            rectanglesPositionY = parseInt(rectangles[i].getAttribute("y"));
+            rectangles[i].setAttribute("y", rectanglesPositionY + 24);
+        }
+    
+        for(let i = 12; i <= 250; i = i+35){
+            var invader = new Invader(i, 3, 20);
+            svg.appendChild(invader.object);
+        }
+        countY=0;  
     }
-} , 12000);
+    countY++;
+} , 500);
