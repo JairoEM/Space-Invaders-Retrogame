@@ -47,7 +47,7 @@ export class Bullet{
         this.object.setAttribute('cy', this.cy);
         this.object.setAttribute('r', this.r);
         this.object.setAttribute('class', 'circle');
-        this.object.setAttribute('fill','black');
+        this.object.setAttribute('fill','orange');
     }
         
     increaseDamage(){
@@ -83,7 +83,7 @@ export class Invader{
         this.object.setAttribute('fill','purple');
     }
 
-    loseLife(){
+    loseHealth(){
         this.health--;
     }
 
