@@ -115,7 +115,7 @@ function main(){
                         invaders[k].loseHealth();
 
                         if(invaders[k].getHealth() <= 0){
-                            points = points + invaders[k].getPoints();
+                            points = points + 3;
                             svg.removeChild(invaders[k].object);
                             
                             if(points < 10){
@@ -171,7 +171,7 @@ function main(){
             countY=0;  
         }
         countY++;
-    } , 500);
+    } , 10);
 }
 
 document.getElementById("start").addEventListener("click", function(){
