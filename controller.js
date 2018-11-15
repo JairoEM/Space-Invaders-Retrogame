@@ -74,7 +74,7 @@ function main(){
 
 
     //Interval to make shoots move
-    var intervalA = setInterval( () => {
+    var play = setInterval( () => {
         bullet = document.getElementsByClassName("circle");
         for(let i = 0; i < bullet.length; i++){ 
             bulletPositionCY = parseInt(bullet[i].getAttribute("cy"));
@@ -105,7 +105,7 @@ function main(){
                 svg.removeChild(defender.object);
                 
                 document.removeEventListener("keydown", playerActions, false);
-                clearInterval(intervalA);
+                clearInterval(play);
                 return null;               
             }
 
