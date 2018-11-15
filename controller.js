@@ -28,10 +28,13 @@ function main(){
     var invadersMoveX = 1;
     var countX = 8;
     var countY = 2;
+    var invadersSection = 0;
 
 
     // Create function to move the defender's spaceship
     function playerActions(event){
+        event.preventDefault();
+
         key = event.keyCode;
         x = parseInt(defender.object.getAttribute("x"));
         
@@ -136,42 +139,45 @@ function main(){
                     }
                 }
             }
-        }    
-    }, 10);
-
-
-    // Invaders move in X and Y axes and create a new row
-    var intervalB = setInterval( () => {
-        for(let i = 0; i < invaders.length; i++){
-            if(invadersMoveX % 2 == 0){
-                invaderPositionX = parseInt(invaders[i].object.getAttribute("x"));
-                invaders[i].object.setAttribute("x", invaderPositionX + 2);
-            }else{
-                invaderPositionX = parseInt(invaders[i].object.getAttribute("x"));
-                invaders[i].object.setAttribute("x", invaderPositionX - 2);
-            }     
         }
-        if(countX == 12){
-            invadersMoveX++;
-            countX = 0;
-        }
-        countX++;
-
-        if(countY == 24){
-            for(let i = 0; i < invaders.length; i++){ 
-                invaderPositionY = parseInt(invaders[i].object.getAttribute("y"));
-                invaders[i].object.setAttribute("y", invaderPositionY + 24);
-            }
         
-            for(let i = 12; i <= 250; i = i+35){
-                var invader = new Invader(i, 3, 3);
-                svg.appendChild(invader.object);
-                invaders.push(invader);
+        
+        // Invaders move on X and Y axes and create a new rows
+        if(invadersSection == 50){
+            for(let i = 0; i < invaders.length; i++){
+                if(invadersMoveX % 2 == 0){
+                    invaderPositionX = parseInt(invaders[i].object.getAttribute("x"));
+                    invaders[i].object.setAttribute("x", invaderPositionX + 2);
+                }else{
+                    invaderPositionX = parseInt(invaders[i].object.getAttribute("x"));
+                    invaders[i].object.setAttribute("x", invaderPositionX - 2);
+                }     
             }
-            countY=0;  
+            if(countX == 12){
+                invadersMoveX++;
+                countX = 0;
+            }
+            countX++;
+    
+            if(countY == 24){
+                for(let i = 0; i < invaders.length; i++){ 
+                    invaderPositionY = parseInt(invaders[i].object.getAttribute("y"));
+                    invaders[i].object.setAttribute("y", invaderPositionY + 24);
+                }
+            
+                for(let i = 12; i <= 250; i = i+35){
+                    var invader = new Invader(i, 3, 3);
+                    svg.appendChild(invader.object);
+                    invaders.push(invader);
+                }
+                countY=0;  
+            }
+            countY++;
+            invadersSection = 0;
         }
-        countY++;
-    } , 10);
+        invadersSection++;
+        console.log(invadersSection);
+    }, 10);
 }
 
 document.getElementById("start").addEventListener("click", function(){
