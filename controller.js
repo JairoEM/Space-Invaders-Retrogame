@@ -142,7 +142,7 @@ function main(){
         
         
         // Invaders move on X and Y axes and create a new rows
-        if(invadersSection == 5){
+        if(invadersSection == 50){
             for(let i = 0; i < invaders.length; i++){
                 if(invadersMoveX % 2 == 0){
                     invaderPositionX = parseInt(invaders[i].object.getAttribute("x"));
