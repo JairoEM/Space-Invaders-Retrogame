@@ -89,7 +89,7 @@ function main(){
             invaderPositionX = parseInt(invaders[k].object.getAttribute("x"));
             invaderPositionY = parseInt(invaders[k].object.getAttribute("y"));
 
-            if(invaderPositionY >= 390){
+            if(invaderPositionY >= 380){
                 imgLose = document.getElementById("imgLose");
                 imgLose.style.display = "block";
                 imgLose.style.visibility = "visible";
@@ -98,7 +98,6 @@ function main(){
                 tryAgain.style.display = "block";
                 tryAgain.style.visibility = "visible";
                 
-                clearInterval(intervalB);
                 for(let z = 0; z < invaders.length; z++){
                     svg.removeChild(invaders[z].object);
                 }
@@ -143,7 +142,7 @@ function main(){
         
         
         // Invaders move on X and Y axes and create a new rows
-        if(invadersSection == 50){
+        if(invadersSection == 5){
             for(let i = 0; i < invaders.length; i++){
                 if(invadersMoveX % 2 == 0){
                     invaderPositionX = parseInt(invaders[i].object.getAttribute("x"));
