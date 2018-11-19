@@ -119,6 +119,7 @@ function main(){
                         if(invaders[k].getHealth() <= 0){
                             points = points + 3;
                             svg.removeChild(invaders[k].object);
+                            svg.removeChild(invaders[k]);
                             
                             if(points < 10){
                                 pointsLabel.innerHTML = "Points: 00" + points;
@@ -188,6 +189,8 @@ document.getElementById("start").addEventListener("click", function(){
     tryAgain.style.display = "none";
     tryAgain.style.visibility = "hidden";
 
+    document.getElementById("points").innerHTML = "Points: 000";
+
     main();
 });
 
@@ -199,6 +202,8 @@ document.getElementById("tryAgain").addEventListener("click", function(){
     var tryAgain = document.getElementById("tryAgain");
     tryAgain.style.display = "none";
     tryAgain.style.visibility = "hidden";
+
+    document.getElementById("points").innerHTML = "Points: 000";
 
     main();
 });
